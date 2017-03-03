@@ -1,6 +1,6 @@
 # space_elevator - The ActionCable Client for Ruby
 
-space_elevator is a _client_ for integrating a ruby application with a remote ActionCable-based backend provided by Rails 5 or compatible framework. It allows for subscription and publication to multiple _channels_ simultaneously, and eavesdropping on wire-level messages. Harness the power of WebSockets to receive push notifications in your own Ruby applications!
+space_elevator is a _client_ for integrating a ruby application with a remote ActionCable-based backend provided by a Rails 5 application or compatible framework. It allows for subscription and publication to multiple _channels_ simultaneously, features automatic message routing to subscription-specific handlers, and supports eavesdropping on wire-level messages, allowing you to harness the power of WebSockets and receive push notifications in your own Ruby applications!
 
 ## Installation
 
