@@ -37,9 +37,9 @@ module SpaceElevator
             end
          end
 
-        def subscribe_to(channel, data = nil, &block)
-            push(create_subscribe_message(channel, data))
-            channel_handlers[channel] = block
+        def subscribe(identifier, &block)
+            push(create_subscribe_message(identifier))
+            channel_handlers[identifier[:channel]] = block
         end
 
         def push(msg)
@@ -57,22 +57,19 @@ module SpaceElevator
                 command: 'message',
                 identifier: { channel: channel }
             }
-            if data
-                message[:data] = data.to_json # .merge!(data)
-          # message[:data] = message[:data].to_json
-      end
+            message[:data] = data.to_json if data
             message[:identifier] = message[:identifier].to_json
-            # puts message
             message.to_json
         end
 
-        def create_subscribe_message(channel, data)
+        def create_subscribe_message(identifier)
             message = {
                 command: 'subscribe',
-                identifier: { channel: channel }
+                identifier: identifier.to_json
             }
-            message[:identifier].merge!(data) if data
-            message[:identifier] = message[:identifier].to_json
+            # message[:identifier].merge!(data) if data
+            # message[:data] = data.to_json if data
+            # message[:identifier] = message[:identifier].to_json
             # puts message
             message.to_json
         end
