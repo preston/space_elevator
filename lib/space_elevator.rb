@@ -1,4 +1,5 @@
 require 'space_elevator/version'
+require 'json'
 
 module SpaceElevator
     # Super-light utility for integrating with ActionCable-based backends.
