@@ -1,4 +1,5 @@
 require 'space_elevator/version'
+require 'json'
 
 module SpaceElevator
     # Super-light utility for integrating with ActionCable-based backends.
@@ -25,8 +26,8 @@ module SpaceElevator
             end
             client.stream do |raw|
                 message = parse_message(raw.to_s)
-                if message['identifier'] && message['identifier']['channel']
-                    channel_handlers[message['identifier']['channel']].call(message)
+                if message['identifier']
+                    channel_handlers[message['identifier'].to_json].call(message)
                 else
                     connection_handler.call(message)
                 end
@@ -39,23 +40,23 @@ module SpaceElevator
 
         def subscribe(identifier, &block)
             push(create_subscribe_message(identifier))
-            channel_handlers[identifier[:channel]] = block
+            channel_handlers[identifier.to_json] = block
         end
 
         def push(msg)
             client.send_msg(msg)
         end
 
-        def publish(channel, data)
-            msg = create_publish_message(channel, data)
+        def publish(identifier, data)
+            msg = create_publish_message(identifier, data)
             # puts "PUSHING: #{msg}"
             push(msg)
           end
 
-        def create_publish_message(channel, data)
+        def create_publish_message(identifier, data)
             message = {
                 command: 'message',
-                identifier: { channel: channel }
+                identifier: identifier
             }
             message[:data] = data.to_json if data
             message[:identifier] = message[:identifier].to_json
