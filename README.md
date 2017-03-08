@@ -46,8 +46,8 @@ EventMachine.run do
                 puts "Received Chat Event: #{chat}"
                 if chat['type'] == 'confirm_subscription'
                     puts "Subscription to #{chat['identifier']['channel']} confirmed!"
-                    # Broadcast to the channel!
-                    client.publish('ChatChannel', {subject: 'Hi', text: "What's up, y'all!?!?"})
+                    # Broadcast to the channel! The actual channel identifier and message payload is specific to your backend's WebSocket API.
+                    client.publish({channel: 'ChatChannel'}, {subject: 'Hi', text: "What's up, y'all!?!?"})
                 end
             end
 
