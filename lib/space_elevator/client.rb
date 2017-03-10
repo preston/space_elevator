@@ -1,3 +1,5 @@
+require 'json'
+
 module SpaceElevator
     class Client
         attr_accessor :client
