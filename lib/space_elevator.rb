@@ -14,7 +14,7 @@ module SpaceElevator
         def initialize(url, &disconnect_handler)
             self.url = url
             self.disconnect_handler = disconnect_handler
-      end
+        end
 
         def connect(&block)
             self.connection_handler = block
