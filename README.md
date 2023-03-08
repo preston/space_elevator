@@ -1,6 +1,6 @@
 # space_elevator - The ActionCable Client for Ruby
 
-space_elevator is a _client_ for integrating a ruby application with a remote ActionCable-based backend provided by a Rails 5 application or compatible framework. It allows for subscription and publication to multiple _channels_ simultaneously, features automatic message routing to subscription-specific handlers, and supports eavesdropping on wire-level messages, allowing you to harness the power of WebSockets and receive push notifications in your own Ruby applications!
+space_elevator is a _client_ for integrating a ruby application with a remote ActionCable-based backend provided by a Rails 7 (or recent) application or compatible framework. It allows for subscription and publication to multiple _channels_ simultaneously, features automatic message routing to subscription-specific handlers, and supports eavesdropping on wire-level messages, allowing you to harness the power of WebSockets and receive push notifications in your own Ruby applications!
 
 ## Installation
 
@@ -17,6 +17,12 @@ And then execute:
 Or install it yourself as:
 
     $ gem install space_elevator
+
+### Troubleshooting Event Machine Installation
+`gem` may not find the OpenSSL include directory necessary to compile. For macOS users with `brew install openssl` already run can install eventmachine like so:
+
+`gem install eventmachine -- --with-cppflags=-I/opt/homebrew/opt/openssl/include`
+
 
 ## Usage
 
@@ -71,4 +77,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/presto
 
 ## License
 
-This work is published under the Apache 2.0 license. Copyright (c) 2017 Preston Lee.
+This work is published under the Apache 2.0 license. Copyright (c) 2017-2023 Preston Lee.
